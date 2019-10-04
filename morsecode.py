@@ -8,17 +8,24 @@ morsedict={ 'a':'.-', 'b':'-...', 'c':'-.-.', 'd':'-..', 'e':'.', 'f':'..-.', 'g
         '?':'..--..', '/':'-..-.', '-':'-....-', '(':'-.--.', ')':'-.--.-',' ':'w'
 }
 
+#multiplier for sleep time, change this if you want to personalise your morse language
 multipliers={
     'dot':1,
     'dash':3,
     'innerchar_gap':1,
     'short_gap':1,
-    'medium_gap':7
+    'medium_gap':6
 }
 
+#change this string to whatever you want to transmit using morse code, make sure you don't use characters from outside of above dict.
 inputstring="Save Me"
+
+#unit_time is the amount of time in seconds for dot and intrachar_gap
 unit_time=0.3
 
+#change the letter a to 0 for transmitting through power button
+ledon =b"\x8a"
+ledoff=b"\x0a"
 
 def encryptor(a):
     b=''
@@ -50,14 +57,16 @@ def led(state):
     if state:
         led = open("/sys/kernel/debug/ec/ec0/io", "wb")
         led.seek(12)
-        led.write(b"\x8a")
+        led.write(ledon)
         led.flush()
     else:
         led = open("/sys/kernel/debug/ec/ec0/io", "wb")
         led.seek(12)
-        led.write(b"\x0a")
+        led.write(ledoff)
         led.flush()
 
 morsestring=encryptor(inputstring.lower())
 while True:
+    led(False)
+    sleep(1)
     morse_led(morsestring)
