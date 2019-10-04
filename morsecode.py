@@ -13,7 +13,7 @@ multipliers={
     'dot':1,
     'dash':3,
     'innerchar_gap':1,
-    'short_gap':1,
+    'short_gap':2,
     'medium_gap':6
 }
 
@@ -46,10 +46,10 @@ def morse_led(string):
             sleep(unit_time*multipliers['dash'])
             led(False)
             sleep(unit_time*multipliers['innerchar_gap'])
-        elif(code=='w'):
+        elif(code==' '):
             led(False)
             sleep(unit_time*multipliers['short_gap'])            
-        elif(code==' '):
+        elif(code=='W'):
             led(False)
             sleep(unit_time*multipliers['medium_gap'])
 
