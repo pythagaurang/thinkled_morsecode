@@ -1,11 +1,12 @@
 from time import sleep
+import os
 
 morsedict={ 'a':'.-', 'b':'-...', 'c':'-.-.', 'd':'-..', 'e':'.', 'f':'..-.', 'g':'--.', 'h':'....', 
         'i':'..', 'j':'.---', 'k':'-.-', 'l':'.-..', 'm':'--', 'n':'-.', 'o':'---', 'p':'.--.', 
         'q':'--.-', 'r':'.-.', 's':'...', 't':'-', 'u':'..-', 'v':'...-', 'w':'.--', 'x':'-..-', 
         'y':'-.--', 'z':'--..', '1':'.----', '2':'..---', '3':'...--', '4':'....-', '5':'.....',
-        '6':'-....', '7':'--...', '8':'---..', '9':'----.', '0':'-----', ', ':'--..--', '.':'.-.-.-',
-        '?':'..--..', '/':'-..-.', '-':'-....-', '(':'-.--.', ')':'-.--.-',' ':'w'
+        '6':'-....', '7':'--...', '8':'---..', '9':'----.', '0':'-----', ',':'--..--', '.':'.-.-.-',
+        '?':'..--..', '/':'-..-.', '-':'-....-', '(':'-.--.', ')':'-.--.-','\'':'.----.',' ':'/'
 }
 
 #multiplier for sleep time, change this if you want to personalise your morse language
@@ -13,7 +14,7 @@ multipliers={
     'dot':1,
     'dash':3,
     'innerchar_gap':1,
-    'short_gap':2,
+    'short_gap':3,
     'medium_gap':6
 }
 
@@ -21,7 +22,7 @@ multipliers={
 inputstring="Save Me"
 
 #unit_time is the amount of time in seconds for dot and intrachar_gap
-unit_time=0.3
+unit_time=0.05
 
 #change the letter a to 0 for transmitting through power button
 ledon =b"\x8a"
@@ -49,7 +50,7 @@ def morse_led(string):
         elif(code==' '):
             led(False)
             sleep(unit_time*multipliers['short_gap'])            
-        elif(code=='W'):
+        elif(code=='/'):
             led(False)
             sleep(unit_time*multipliers['medium_gap'])
 
@@ -66,7 +67,15 @@ def led(state):
         led.flush()
 
 morsestring=encryptor(inputstring.lower())
-while True:
-    led(False)
-    sleep(1)
-    morse_led(morsestring)
+def morse_loop():
+    while True:
+        sleep(1)
+        morse_led(morsestring)
+
+if __name__ == '__main__':
+    try:
+        morse_loop()
+    except KeyboardInterrupt:
+        print('\nInterrupted')
+        led(True)
+        os._exit(0)
