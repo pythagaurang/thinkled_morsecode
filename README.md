@@ -16,3 +16,7 @@ sudo modprobe ec_sys write_support=1
 ```
 sudo python3 thinkled_morsecode/morsecode.py
 ```
+
+## Future Releases
+
+I want to make this code work with all the leds on the laptop, which are accessable through sys/class/leds and that'd also mean that this code will be able to work with many other laptops.
