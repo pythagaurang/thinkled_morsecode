@@ -74,8 +74,9 @@ def morse_loop():
 
 if __name__ == '__main__':
     try:
-        morse_loop()
+        morse_loop(morsestring)
     except KeyboardInterrupt:
-        print('\nInterrupted')
-        led(True)
-        os._exit(0)
+        if(input("\nInterrupted: Turn off led?(y/n) ").lower()=="y"):
+            led(False)
+        else:
+            led(True)
