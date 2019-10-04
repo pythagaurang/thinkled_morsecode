@@ -19,4 +19,5 @@ sudo python3 thinkled_morsecode/morsecode.py
 
 ## Future Releases
 
-I want to make this code work with all the leds on the laptop, which are accessable through sys/class/leds and that'd also mean that this code will be able to work with many other laptops.
+I want to make this code work with all the leds on the laptop, which can be accessed through sys/class/leds. 
+That will also allow this code to work with other laptops.
