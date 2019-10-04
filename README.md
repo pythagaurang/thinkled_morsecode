@@ -7,12 +7,12 @@ I wrote a morse translator first that'd just translate English letters to morse 
 For the led on and off code, I reffered this reddit [post](https://redd.it/7n8eyu/).
 
 ## Getting Started
-Run the following commands in terminal or dd ec_sys.write_support=1 to your kernel parameters.
+- Run the following commands in terminal or add `ec_sys.write_support=1` to your kernel parameters.
 ```
 sudo modprobe -r ec_sys
 sudo modprobe ec_sys write_support=1
 ```
-Clone this repository and run the python file as root.
+- Clone this repository and run the python file as root.
 ```
 sudo python3 thinkled_morsecode/morsecode.py
 ```
